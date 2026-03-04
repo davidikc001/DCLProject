@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Continuous Guessing Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e8f5e9, blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-box {
+            background: white;
+            padding: 25px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="game-box">
+    <h2>Guess the Number (1–100)</h2>
+
+    <input type="number" id="guess" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Submit Guess</button>
+
+    <p id="message"></p>
+    <p>Attempts Left: <span id="attempts">10</span></p>
+    <p>Score: <span id="score">100</span></p>
+</div>
+
+<script>
+    let randomNumber = generateNumber();
+    let attempts = 10;
+    let score = 100;
+
+    function generateNumber() {
+        return Math.floor(Math.random() * 100) + 1;
+    }
+
+    function resetRound() {
+        randomNumber = generateNumber();
+        attempts = 10;
+        document.getElementById("attempts").textContent = attempts;
+        document.getElementById("guess").value = "";
+    }
+
+    function checkGuess() {
+        let userGuess = parseInt(document.getElementById("guess").value);
+
+        if (isNaN(userGuess)) {
+            document.getElementById("message").textContent =
+                "Please enter a valid number.";
+            return;
+        }
+
+        if (userGuess === randomNumber) {
+            score += 10;
+            document.getElementById("message").textContent =
+                "Correct! +10 points. New number generated.";
+            document.getElementById("score").textContent = score;
+            resetRound();
+        } else {
+            attempts--;
+            document.getElementById("message").textContent =
+                userGuess > randomNumber ? "Too high!" : "Too low!";
+            document.getElementById("attempts").textContent = attempts;
+
+            if (attempts === 0) {
+                score -= 10;
+                document.getElementById("score").textContent = score;
+                document.getElementById("message").textContent =
+                    "Out of attempts! −10 points. New number generated.";
+                resetRound();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
