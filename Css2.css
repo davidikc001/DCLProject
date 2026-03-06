@@ -4,7 +4,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+p {
+background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
 /* Body */
 body {
     font-family: Arial, sans-serif;
@@ -39,7 +43,6 @@ body {
 .hero-image {
     width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
 }
 
@@ -194,6 +197,9 @@ button:hover {
 
 /* Footer */
 footer {
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: bottom;
     bottom: 0;
     width: 100%;
@@ -201,7 +207,6 @@ footer {
     padding: 15px;
     color: white;
     margin-top: 30px;
-    background: linear-gradient(to right, #0066ff, #000000);
 }
 .email-input {
   width: 100%;
